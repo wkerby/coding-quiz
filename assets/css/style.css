@@ -7,24 +7,30 @@
     /* insert css rule */
 }
 
-.top {
+.top,
+.bottom {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
+    justify-content: space-around;
 
-    /*assign to top div*/
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+
     /* insert css rule */
 
 }
 
-.middle {
-    /*assign to middle div*/
+.left {
     /* insert css rule */
 
 }
 
-.choices {
-    /*assign to choices ul*/
+.bottom {
+    /*assign to bottom div*/
     /* insert css rule */
 
 }
