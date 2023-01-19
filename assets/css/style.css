@@ -1,11 +1,8 @@
 .container {
-    /* insert css rule */
     background-color: gray;
 }
 
-.question {
-    /* insert css rule */
-}
+.question {}
 
 .top,
 .bottom {
@@ -16,21 +13,23 @@
 
 }
 
-.right {
+.bottom .right {
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 
-    /* insert css rule */
 
-}
-
-.left {
-    /* insert css rule */
 
 }
 
-.bottom {
-    /*assign to bottom div*/
-    /* insert css rule */
+.left {}
 
+.bottom {}
+
+#next-button {
+    display: inline-block;
+    background-image: "./assets/images/next-button.jpg";
+    width: 50%;
+    height: 10%;
 }
