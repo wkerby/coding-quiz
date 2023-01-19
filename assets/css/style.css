@@ -1,0 +1,30 @@
+.container {
+    /* insert css rule */
+    background-color: gray;
+}
+
+.question {
+    /* insert css rule */
+}
+
+.top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+
+    /*assign to top div*/
+    /* insert css rule */
+
+}
+
+.middle {
+    /*assign to middle div*/
+    /* insert css rule */
+
+}
+
+.choices {
+    /*assign to choices ul*/
+    /* insert css rule */
+
+}
