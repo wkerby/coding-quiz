@@ -13,7 +13,8 @@
 
 }
 
-.bottom .right {
+.bottom .right,
+.top-right {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -32,4 +33,11 @@
     background-image: "./assets/images/next-button.jpg";
     width: 50%;
     height: 10%;
+}
+
+.top-middle {}
+
+.top-right img {
+    width: 40%;
+    height: 40%;
 }
