@@ -13,6 +13,14 @@
 
 }
 
+
+.top {
+    padding-top: 1%;
+    /* display: flex;
+    flex-wrap: wrap;
+    flex-direction: column; */
+}
+
 .bottom .right,
 .top-right {
     display: flex;
@@ -24,9 +32,16 @@
 
 }
 
+.bottom .left {}
+
 .left {}
 
-.bottom {}
+.bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: left;
+}
 
 #next-button {
     display: inline-block;
