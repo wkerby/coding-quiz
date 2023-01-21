@@ -1,26 +1,22 @@
 .container {
     background-color: gray;
+    border-radius: 0.5%;
 }
-
-.question {}
 
 .bottom {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
-    justify-content: space-around;
+    justify-content: left;
 
 }
-
 
 .top {
     padding-top: 1%;
     display: flex;
     align-items: flex-start;
     justify-content: space-around;
-    /* display: flex;
-    flex-wrap: wrap;
-    flex-direction: column; */
+
 }
 
 .bottom .right,
@@ -36,33 +32,25 @@
     margin-left: 5%;
 }
 
-.bottom .left {}
-
 .left {
     padding-right: 50%;
     padding-bottom: 3%;
 }
 
-.bottom {
-    display: flex;
-    /* flex-wrap: wrap; */
-    align-items: flex-start;
-    justify-content: left;
-}
-
 #next-button {
-    /* display: inline-block; */
     width: 70px;
     height: 30px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     align-items: center;
+    border-radius: 10%;
 }
 
 .top-right img {
     width: 40%;
     height: 40%;
+    border-radius: 15%;
 }
 
 h1 {
@@ -70,6 +58,7 @@ h1 {
 }
 
 .left li {
+    /*add spacing between possible answers*/
     margin-top: 6%;
     margin-bottom: 6%;
 }
