@@ -21,22 +21,52 @@ var questions = {
     Question5: ["Is programming fun to learn?", ["No", "No", "Yes", "No"], "Yes"]
 };
 
-function displayTime() {
-    setInterval(function () {
+function gameOver() {
+    timeRem.textContent = "GAME OVER"; //display total numer of points here at end of game
+}
+
+function secondsToMins(numSeconds) { //create functiont that takes number of seconds an returns array of number of minutes, tens of seconds, and seconds
+    if (numSeconds < 0) {
+        return;
+    }
+
+    else if (numSeconds === 0) {
+        return [0, 0, 0];
+
+    }
+
+    else if (numSeconds > 0 && numSeconds < 60) {
+        var tenSeconds = Math.floor(numSeconds / 10);
+        var oneSeconds = numSeconds - tenSeconds * 10;
+        return [0, tenSeconds, oneSeconds];
+    }
+
+    else {
+        var minutes = Math.floor(numSeconds / 60);
+        if (numSeconds - (minutes * 60) < 10) {
+            var tenSeconds = 0
+        }
+        else {
+            var tenSeconds = Math.floor(((numSeconds - (minutes * 60)) / 10));
+        }
+
+        var oneSeconds = (numSeconds - (minutes * 60)) - (tenSeconds * 10);
+        return [minutes, tenSeconds, oneSeconds];
+    }
+}
+
+function displayTime() { //create function that dynamically displays time in the top-right p element
+    var timerInterval = setInterval(function () {
+        secondsRem--;
         if (secondsRem == 0) {
-            timeRem.textContent = "GAME OVER" //display total numer of points here at end of game
+            clearInterval(timerInterval);
+            gameOver();
         }
 
         else {
-            secondsRem--;
+            var time = secondsToMins(secondsRem);
+            timeRem.textContent(time[0] + ":" + time[1] + time[2]);
         }
 
-
-
-
-    }, 1000)
-
-
-
+    }, 1000);
 }
-
