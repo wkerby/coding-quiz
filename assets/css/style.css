@@ -4,7 +4,6 @@
 
 .question {}
 
-.top,
 .bottom {
     display: flex;
     flex-wrap: wrap;
@@ -16,6 +15,9 @@
 
 .top {
     padding-top: 1%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
     /* display: flex;
     flex-wrap: wrap;
     flex-direction: column; */
@@ -36,20 +38,25 @@
 
 .bottom .left {}
 
-.left {}
+.left {
+    padding-right: 50%;
+}
 
 .bottom {
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     align-items: flex-start;
     justify-content: left;
 }
 
 #next-button {
-    display: inline-block;
-    background-image: "./assets/images/next-button.jpg";
-    width: 50%;
-    height: 10%;
+    /* display: inline-block; */
+    width: 50px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: space-around;
 }
 
 .top-middle {}
@@ -61,4 +68,9 @@
 
 h1 {
     text-align: center;
+}
+
+.left li {
+    margin-top: 6%;
+    margin-bottom: 6%;
 }
