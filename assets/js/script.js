@@ -24,9 +24,13 @@ var questions = {
 function displayTime() {
     setInterval(function () {
         if (secondsRem == 0) {
-
+            timeRem.textContent = "GAME OVER" //display total numer of points here at end of game
         }
-        secondsRem--;
+
+        else {
+            secondsRem--;
+        }
+
 
 
 
