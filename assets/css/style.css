@@ -52,6 +52,11 @@ body {
     border-style: none;
 }
 
+#next-button:hover {
+    width: 72px;
+    height: 32px;
+}
+
 .top-right img {
     width: 40%;
     height: 40%;
@@ -72,6 +77,10 @@ h1 {
     /*add spacing between possible answers*/
     margin-top: 6%;
     margin-bottom: 6%;
+}
+
+.left li:hover {
+    font-weight: 700;
 }
 
 button div {
