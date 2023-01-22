@@ -11,6 +11,8 @@ var choiceD = choices[3];
 var responseDisplay = document.querySelector(".right p");
 var totalPoints = 0;
 var secondsRem = 120;
+var numCorrect = 0; //variable to log the number of correct answers 
+var gameOn = true; //boolean indicating that game is still in play
 
 //create questions, possible answers, and correct answers
 var questions = {
@@ -24,6 +26,7 @@ var questions = {
 
 function gameOver() {
     timeRem.textContent = "GAME OVER"; //display total numer of points here at end of game
+    gameOn = false;
 }
 
 function secondsToMins(numSeconds) { //create functiont that takes number of seconds an returns array of number of minutes, tens of seconds, and seconds
@@ -64,6 +67,11 @@ function displayTime() { //create function that dynamically displays time in the
             gameOver();
         }
 
+        else if (gameOn == false) {
+            secondsRem = secondsRem //capture the number of seconds remaining at the end of the game
+            clearInterval(timerInterval)
+        }
+
         else {
             var time = secondsToMins(secondsRem);
             timeRem.textContent(time[0] + ":" + time[1] + time[2]);
@@ -72,24 +80,11 @@ function displayTime() { //create function that dynamically displays time in the
     }, 1000);
 }
 
-
-function wrongRight(event) { //create a function that notifies player if he she
-    var evalEl = event.target
-    if (evalEl === questions.Question0[2]) {
-        responseDisplay.setAttribute("style", "color:green;");
-        responseDisplay.textContent = "Correct!";
-    }
-
-    else {
-        responseDisplay
-    }
-    //how do you store what is clicked on into a function
-}
-
 function nextQuestion() { //create function to determine which question to assign to current question
     index = index + 1;
     if (index > (object.Values(questions).length) - 1) {
         index = 0;
+        gameOver(); //make sure to end game when the player has cycled throug all of the questions
     }
 
     else {
@@ -100,4 +95,40 @@ function nextQuestion() { //create function to determine which question to assig
     currentChoices = object.Values(questions)[index][1]; //set current answer choices
     currentAnswer = object.Values(questions)[index][2]; //set current correct answer
 
+    question.textContent = currentQuestion; //write current question into webpage
+    choiceA.textContent = currentChoices[0]; //write answer choice A
+    choiceB.textContent = currentChoices[1]; //write answer choice B
+    choiceC.textContent = currentChoices[2]; //write answer choice C
+    choiceD.textContent = currentChoices[3]; //write answer choice D
+
 }
+
+function wrongRight(event) { //create a function that notifies player if he/she chose corrrect or incorrect answer
+    var evalEl = event.target
+    if (evalEl === currentAnswer) {
+        responseDisplay.setAttribute("style", "color:green; font-weight:700;");
+        responseDisplay.textContent = "Correct!";
+        numCorrect++;
+    }
+
+    else {
+        responseDisplay.setAttribute("style", "color:red; font-weight:700;");
+        responseDisplay.textContent("Incorrect");
+        secondsRem = secondsRem - 15;
+    }
+
+}
+
+function returnFinalScore(secondsRem, numCorrect) { //return final score as a function of number of correct answers chosen and number of seconds remaining when game is over
+    if (numCorrect == 0) {
+        finalScore = numCorrect;
+    }
+
+    else {
+        finalScore = numCorrect * secondsRem;
+    }
+
+    return finalScore;
+}
+
+
