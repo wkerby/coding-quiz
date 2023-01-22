@@ -19,7 +19,7 @@ body {
     padding-top: 1%;
     display: flex;
     align-items: flex-start;
-    justify-content: space-between;
+    justify-content: space-around;
 
 }
 
@@ -89,4 +89,8 @@ h1 {
 
 button div {
     font-family: 'Open Sans', sans-serif;
+}
+
+.question p {
+    font-size: larger;
 }

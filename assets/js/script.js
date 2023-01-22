@@ -9,6 +9,7 @@ var choiceB = choices[1];
 var choiceC = choices[2];
 var choiceD = choices[3];
 var responseDisplay = document.querySelector(".right p");
+var totalPoints = 0;
 var secondsRem = 120;
 
 //create questions, possible answers, and correct answers
@@ -69,4 +70,34 @@ function displayTime() { //create function that dynamically displays time in the
         }
 
     }, 1000);
+}
+
+
+function wrongRight(event) { //create a function that notifies player if he she
+    var evalEl = event.target
+    if (evalEl === questions.Question0[2]) {
+        responseDisplay.setAttribute("style", "color:green;");
+        responseDisplay.textContent = "Correct!";
+    }
+
+    else {
+        responseDisplay
+    }
+    //how do you store what is clicked on into a function
+}
+
+function nextQuestion() { //create function to determine which question to assign to current question
+    index = index + 1;
+    if (index > (object.Values(questions).length) - 1) {
+        index = 0;
+    }
+
+    else {
+        index++;
+    }
+
+    currentQuestion = object.Values(questions)[index][0]; //set current question
+    currentChoices = object.Values(questions)[index][1]; //set current answer choices
+    currentAnswer = object.Values(questions)[index][2]; //set current correct answer
+
 }
