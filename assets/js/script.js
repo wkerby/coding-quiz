@@ -24,6 +24,7 @@ var questions = {
     Question5: ["Is programming fun to learn?", ["No", "No", "Yes", "No"], "Yes"]
 };
 
+//create functions
 function startGame() {
     gameOn = true;
 }
@@ -132,11 +133,12 @@ function returnFinalScore(secondsRem, numCorrect) { //return final score as a fu
 }
 
 function endGame() {
-    returnFinalScore(secondsRem, numCorrect);
-    timeRem.textContent = "GAME OVER"; //display total numer of points here at end of game
+    finalScore = returnFinalScore(secondsRem, numCorrect);
+    timeRem.textContent = "GAME OVER! Final score: " + finalScore; //display total numer of points here at end of game
     gameOn = false;
 }
 
+//create event listeners
 
 //add event listener to hourglass button so that it begins the game when it is selected
 hourGlass.addEventListener('click', startGame);
