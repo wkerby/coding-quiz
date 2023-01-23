@@ -13,7 +13,7 @@ var totalPoints = 0;
 var secondsRem = 120;
 var numCorrect = 0; //variable to log the number of correct answers 
 var gameOn = false; //boolean indicating that game is/is not in play //set to false until end-user wants game to begin
-
+var index = 0; //variable to establish starting point for question display
 //create questions, possible answers, and correct answers
 var questions = {
     Question0: ["Which of the following is a pseudo-class that targets an element's style when it is hovered over?", [":hover", ":mouse", ":cover", ":envelope"], ":hover"],
@@ -26,6 +26,7 @@ var questions = {
 
 //create functions
 function startGame() {
+    console.log("Game started")
     gameOn = true;
 }
 
@@ -68,39 +69,42 @@ function displayTime() { //create function that dynamically displays time in the
         }
 
         else if (gameOn == false) {
-            secondsRem = secondsRem //capture the number of seconds remaining at the end of the game
+            secondsRem = secondsRem //capture the number of seconds remaining at the end of the game if game ends with time remaining
             clearInterval(timerInterval)
         }
 
         else {
             var time = secondsToMins(secondsRem);
-            timeRem.textContent(time[0] + ":" + time[1] + time[2]);
+            timeRem.textContent = time[0] + ":" + time[1] + time[2];
         }
 
     }, 1000);
 }
 
 function nextQuestion() { //create function to determine which question to assign to current question
-    index = index + 1;
-    if (index > (object.Values(questions).length) - 1) {
-        index = 0;
-        endGame(); //make sure to end game when the player has cycled throug all of the questions
-    }
-
-    else {
+    if (gameOn) {
+        console.log("Next question");
         index++;
+        if (index > (Object.values(questions).length) - 1) {
+            index = 0;
+            endGame(); //make sure to end game when the player has cycled throug all of the questions
+        }
+
+        else {
+            index++;
+        }
+
+        currentQuestion = object.Values(questions)[index][0]; //set current question
+        currentChoices = object.Values(questions)[index][1]; //set current answer choices
+        currentAnswer = object.Values(questions)[index][2]; //set current correct answer
+
+        question.textContent = currentQuestion; //write current question into webpage
+        choiceA.textContent = currentChoices[0]; //write answer choice A
+        choiceB.textContent = currentChoices[1]; //write answer choice B
+        choiceC.textContent = currentChoices[2]; //write answer choice C
+        choiceD.textContent = currentChoices[3]; //write answer choice D
+
     }
-
-    currentQuestion = object.Values(questions)[index][0]; //set current question
-    currentChoices = object.Values(questions)[index][1]; //set current answer choices
-    currentAnswer = object.Values(questions)[index][2]; //set current correct answer
-
-    question.textContent = currentQuestion; //write current question into webpage
-    choiceA.textContent = currentChoices[0]; //write answer choice A
-    choiceB.textContent = currentChoices[1]; //write answer choice B
-    choiceC.textContent = currentChoices[2]; //write answer choice C
-    choiceD.textContent = currentChoices[3]; //write answer choice D
-
 }
 
 function wrongRight(event) { //create a function that notifies player if he/she chose corrrect or incorrect answer
@@ -146,16 +150,14 @@ hourGlass.addEventListener('click', startGame);
 //add event listener to hourglass so that it starts timer when it is selected
 hourGlass.addEventListener('click', displayTime);
 
-while (gameOn) { //while the game is in play, allow event listener functionality to next button
+//add event listenet for next button
+nextButton.addEventListener('click', nextQuestion);
 
-    //add event listenet for next button
-    nextButton.addEventListener('click', nextQuestion);
+//add event listener for all possible answer choices
+choiceA.addEventListener('click', wrongRight);
+choiceB.addEventListener('click', wrongRight);
+choiceC.addEventListener('click', wrongRight);
+choiceD.addEventListener('click', wrongRight);
 
-    //add event listener for all possible answer choices
-    choiceA.addEventListener('click', wrongRight);
-    choiceB.addEventListener('click', wrongRight);
-    choiceC.addEventListener('click', wrongRight);
-    choiceD.addEventListener('click', wrongRight);
 
-}
 
