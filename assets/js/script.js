@@ -12,7 +12,7 @@ var responseDisplay = document.querySelector(".right p");
 var totalPoints = 0;
 var secondsRem = 120;
 var numCorrect = 0; //variable to log the number of correct answers 
-var gameOn = true; //boolean indicating that game is still in play
+var gameOn = false; //boolean indicating that game is/is not in play //set to false until end-user wants game to begin
 
 //create questions, possible answers, and correct answers
 var questions = {
@@ -24,9 +24,8 @@ var questions = {
     Question5: ["Is programming fun to learn?", ["No", "No", "Yes", "No"], "Yes"]
 };
 
-function gameOver() {
-    timeRem.textContent = "GAME OVER"; //display total numer of points here at end of game
-    gameOn = false;
+function startGame() {
+    gameOn = true;
 }
 
 function secondsToMins(numSeconds) { //create functiont that takes number of seconds an returns array of number of minutes, tens of seconds, and seconds
@@ -64,7 +63,7 @@ function displayTime() { //create function that dynamically displays time in the
         secondsRem--;
         if (secondsRem == 0) {
             clearInterval(timerInterval);
-            gameOver();
+            endGame();
         }
 
         else if (gameOn == false) {
@@ -84,7 +83,7 @@ function nextQuestion() { //create function to determine which question to assig
     index = index + 1;
     if (index > (object.Values(questions).length) - 1) {
         index = 0;
-        gameOver(); //make sure to end game when the player has cycled throug all of the questions
+        endGame(); //make sure to end game when the player has cycled throug all of the questions
     }
 
     else {
@@ -104,6 +103,7 @@ function nextQuestion() { //create function to determine which question to assig
 }
 
 function wrongRight(event) { //create a function that notifies player if he/she chose corrrect or incorrect answer
+    event.stopPropagation() // add stopPropagation function to avoid event bubbling
     var evalEl = event.target
     if (evalEl === currentAnswer) {
         responseDisplay.setAttribute("style", "color:green; font-weight:700;");
@@ -131,4 +131,29 @@ function returnFinalScore(secondsRem, numCorrect) { //return final score as a fu
     return finalScore;
 }
 
+function endGame() {
+    returnFinalScore(secondsRem, numCorrect);
+    timeRem.textContent = "GAME OVER"; //display total numer of points here at end of game
+    gameOn = false;
+}
+
+
+//add event listener to hourglass button so that it begins the game when it is selected
+hourGlass.addEventListener('click', startGame);
+
+//add event listener to hourglass so that it starts timer when it is selected
+hourGlass.addEventListener('click', displayTime);
+
+while (gameOn) { //while the game is in play, allow event listener functionality to next button
+
+    //add event listenet for next button
+    nextButton.addEventListener('click', nextQuestion);
+
+    //add event listener for all possible answer choices
+    choiceA.addEventListener('click', wrongRight);
+    choiceB.addEventListener('click', wrongRight);
+    choiceC.addEventListener('click', wrongRight);
+    choiceD.addEventListener('click', wrongRight);
+
+}
 
