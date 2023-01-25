@@ -12,17 +12,19 @@ var choiceD = choices[3];
 var responseDisplay = document.querySelector(".right p");
 var totalPoints = 0;
 var secondsRem = 120;
-var numCorrect = 0; //variable to log the number of correct answers 
+var numCorrect = 0; //variable to log the number of correct answers
+var numIncorrect = 0; //variable to track the number of incorrect guesses made by user
 var gameOn = false; //boolean indicating that game is/is not in play //set to false until end-user wants game to begin
 var index = 0; //variable to establish starting point for question display
 
 var questions = { //create object to store questions, possible answers, and correct answers
     Question0: ["Which of the following is a pseudo-class that targets an element's style when it is hovered over?", [":hover", ":mouse", ":cover", ":envelope"], ":hover"],
-    Question1: ["What is the language used to apply styling to a webpage?", ["CSS", "JavaScript", "HTML", "C#"], "CSS"],
-    Question2: ["What is the language used to organize contents on a webpage?", ["CSS", "JavaScript", "Ruby", "HTML"], "HTML"],
-    Question3: ["What is the language used to establish interactivity between the end-user and the webpage?", ["Python", "JavaScript", "Perl", "HTML"], "JavaScript"],
-    Question4: ["What object of the window interface allows programmers to store data entered by the end-user?", ["localStorage", "storeObject", "body", "memory"], "LocalStorage"],
-    Question5: ["Is programming fun to learn?", ["No", "No", "Yes", "No"], "Yes"]
+    Question1: ["Which of the following is used to apply styling to a webpage?", ["CSS", "JavaScript", "HTML", "C#"], "CSS"],
+    Question2: ["Which of the following is used to organize contents on a webpage?", ["CSS", "JavaScript", "Ruby", "HTML"], "HTML"],
+    Question3: ["Which of the following is used to establish interactivity between the end-user and the webpage?", ["Python", "JavaScript", "Perl", "HTML"], "JavaScript"],
+    Question4: ["Which property of the window interface allows programmers to store data entered by the end-user?", ["localStorage", "storeObject", "body", "memory"], "localStorage"],
+    Question5: ["Which method sets up a function that will be called whenever the specified event is delivered to the target?", ["addEventListener()", "listenEvent()", "bubbleTarget()", "switchFace()"], "addEventListener()"],
+    Question6: ["Is programming fun to learn?", ["No", "No", "Yes", "No"], "Yes"]
 };
 
 
@@ -39,6 +41,8 @@ function questionSet() { //create function to establish question, answer choices
     choiceB.textContent = currentChoices[1]; //write answer choice B
     choiceC.textContent = currentChoices[2]; //write answer choice C
     choiceD.textContent = currentChoices[3]; //write answer choice D
+
+    responseDisplay.textContent = ""; //to ensure that correct or incorrect response display does not carry over from previous question
 }
 
 function startGame() { //create function that starts game 
@@ -47,11 +51,8 @@ function startGame() { //create function that starts game
 }
 
 function secondsToMins(numSeconds) { //create functiont that takes number of seconds an returns array of number of minutes, tens of seconds, and seconds
-    if (numSeconds < 0) {
-        return;
-    }
 
-    else if (numSeconds === 0) {
+    if (numSeconds <= 0) {
         return [0, 0, 0];
 
     }
@@ -79,7 +80,7 @@ function secondsToMins(numSeconds) { //create functiont that takes number of sec
 function displayTime() { //create function that dynamically displays time in the top-right p element
     var timerInterval = setInterval(function () {
         secondsRem--;
-        if (secondsRem == 0) {
+        if (secondsRem <= 0) {
             clearInterval(timerInterval);
             endGame();
         }
@@ -115,18 +116,20 @@ function nextQuestion() { //create function to determine which question to assig
 function wrongRight(event) { //create a function that notifies player if he/she chose corrrect or incorrect answer
     event.stopPropagation() // add stopPropagation function to avoid event bubbling
     var evalEl = event.target
-    console.log(evalEl);
-    console.log(currentAnswer);
     if (evalEl.textContent === currentAnswer) {
-        responseDisplay.setAttribute("style", "color:green; font-weight:700;");
+        responseDisplay.setAttribute("style", "color:green; font-weight:900;");
         responseDisplay.textContent = "Correct!";
         numCorrect++;
+        console.log("Current Correct: " + numCorrect);
     }
 
     else {
-        responseDisplay.setAttribute("style", "color:red; font-weight:700;");
+        responseDisplay.setAttribute("style", "color:red; font-weight:900;");
         responseDisplay.textContent = "Incorrect";
         secondsRem = secondsRem - 15;
+        numIncorrect++;
+        console.log("Current Incorrect: " + numIncorrect);
+
     }
 
 }
@@ -168,6 +171,8 @@ choiceA.addEventListener('click', wrongRight);
 choiceB.addEventListener('click', wrongRight);
 choiceC.addEventListener('click', wrongRight);
 choiceD.addEventListener('click', wrongRight);
+
+//add event listener to track number of times any answer choice is selected during the course of a question
 
 
 
