@@ -134,7 +134,7 @@ function wrongRight(event) { //create a function that notifies player if he/she 
 
 }
 
-function returnFinalScore(secondsRem, numCorrect) { //return final score as a function of number of correct answers chosen and number of seconds remaining when game is over
+function returnFinalScore(secondsRem, numCorrect) { //return final score as a function of number of correct answers chosen, number of incorrect answers chosen, and number of seconds remaining when game is over
 
     if (numCorrect == 0) {
         finalScore = numCorrect;
@@ -142,10 +142,10 @@ function returnFinalScore(secondsRem, numCorrect) { //return final score as a fu
 
     else {
         if (secondsRem > 0) {
-            finalScore = (numCorrect * secondsRem); //i.e. if user finishes the quiz with time remaining
+            finalScore = (numCorrect * secondsRem * 5) - numIncorrect; //i.e. if user finishes the quiz with time remaining
         }
 
-        else finalScore = Math.ceil(numCorrect * 0.5); //multiply by 0.5 if there are exactly 0 seconds remaining when user finishes quiz
+        else finalScore = Math.ceil(numCorrect * 2.5) - math.Ceil(numIncorrect * 0.5); //multiply by 0.5 if there are exactly 0 seconds remaining when user finishes quiz
 
     }
 
@@ -178,7 +178,6 @@ choiceB.addEventListener('click', wrongRight);
 choiceC.addEventListener('click', wrongRight);
 choiceD.addEventListener('click', wrongRight);
 
-//add event listener to track number of times any answer choice is selected during the course of a question
 
 
 
