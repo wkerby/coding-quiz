@@ -1,4 +1,5 @@
 //create variables
+
 var hourGlass = document.querySelector("#hourglass");
 var timeRem = document.querySelector('.top-right p');
 var nextButton = document.querySelector("#next-button");
@@ -14,8 +15,8 @@ var secondsRem = 120;
 var numCorrect = 0; //variable to log the number of correct answers 
 var gameOn = false; //boolean indicating that game is/is not in play //set to false until end-user wants game to begin
 var index = 0; //variable to establish starting point for question display
-//create questions, possible answers, and correct answers
-var questions = {
+
+var questions = { //create object to store questions, possible answers, and correct answers
     Question0: ["Which of the following is a pseudo-class that targets an element's style when it is hovered over?", [":hover", ":mouse", ":cover", ":envelope"], ":hover"],
     Question1: ["What is the language used to apply styling to a webpage?", ["CSS", "JavaScript", "HTML", "C#"], "CSS"],
     Question2: ["What is the language used to organize contents on a webpage?", ["CSS", "JavaScript", "Ruby", "HTML"], "HTML"],
@@ -24,19 +25,23 @@ var questions = {
     Question5: ["Is programming fun to learn?", ["No", "No", "Yes", "No"], "Yes"]
 };
 
-//establish question, answer choices, and correct answer at start of game
-currentQuestion = Object.values(questions)[index][0]; //set current question
-currentChoices = Object.values(questions)[index][1]; //set current answer choices
-currentAnswer = Object.values(questions)[index][2]; //set current correct answer
-
-question.textContent = currentQuestion; //write current question into webpage
-choiceA.textContent = currentChoices[0]; //write answer choice A
-choiceB.textContent = currentChoices[1]; //write answer choice B
-choiceC.textContent = currentChoices[2]; //write answer choice C
-choiceD.textContent = currentChoices[3]; //write answer choice D
 
 //create functions
-function startGame() {
+
+function questionSet() { //create function to establish question, answer choices, and correct answer
+
+    currentQuestion = Object.values(questions)[index][0]; //set current question
+    currentChoices = Object.values(questions)[index][1]; //set current answer choices
+    currentAnswer = Object.values(questions)[index][2]; //set current correct answer
+
+    question.textContent = currentQuestion; //write current question into webpage
+    choiceA.textContent = currentChoices[0]; //write answer choice A
+    choiceB.textContent = currentChoices[1]; //write answer choice B
+    choiceC.textContent = currentChoices[2]; //write answer choice C
+    choiceD.textContent = currentChoices[3]; //write answer choice D
+}
+
+function startGame() { //create function that starts game 
     console.log("Game started")
     gameOn = true;
 }
@@ -102,15 +107,7 @@ function nextQuestion() { //create function to determine which question to assig
         }
 
         else {
-            currentQuestion = Object.values(questions)[index][0]; //set current question
-            currentChoices = Object.values(questions)[index][1]; //set current answer choices
-            currentAnswer = Object.values(questions)[index][2]; //set current correct answer
-
-            question.textContent = currentQuestion; //write current question into webpage
-            choiceA.textContent = currentChoices[0]; //write answer choice A
-            choiceB.textContent = currentChoices[1]; //write answer choice B
-            choiceC.textContent = currentChoices[2]; //write answer choice C
-            choiceD.textContent = currentChoices[3]; //write answer choice D
+            questionSet();
         }
     }
 }
@@ -118,7 +115,9 @@ function nextQuestion() { //create function to determine which question to assig
 function wrongRight(event) { //create a function that notifies player if he/she chose corrrect or incorrect answer
     event.stopPropagation() // add stopPropagation function to avoid event bubbling
     var evalEl = event.target
-    if (evalEl === currentAnswer) {
+    console.log(evalEl);
+    console.log(currentAnswer);
+    if (evalEl.textContent === currentAnswer) {
         responseDisplay.setAttribute("style", "color:green; font-weight:700;");
         responseDisplay.textContent = "Correct!";
         numCorrect++;
@@ -126,7 +125,7 @@ function wrongRight(event) { //create a function that notifies player if he/she 
 
     else {
         responseDisplay.setAttribute("style", "color:red; font-weight:700;");
-        responseDisplay.textContent("Incorrect");
+        responseDisplay.textContent = "Incorrect";
         secondsRem = secondsRem - 15;
     }
 
@@ -149,6 +148,9 @@ function endGame() {
     timeRem.textContent = "GAME OVER! Final score: " + finalScore; //display total numer of points here at end of game
     gameOn = false;
 }
+
+//run questionSet function to render the first question onto the page 
+questionSet();
 
 //create event listeners
 
