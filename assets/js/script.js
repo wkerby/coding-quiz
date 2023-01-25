@@ -150,10 +150,10 @@ function returnFinalScore(secondsRem, numCorrect) { //return final score as a fu
 
     else {
         if (secondsRem > 0) {
-            finalScore = Math.ceil((numCorrect * 10) * (0.33 * secondsRem) * 2) - numIncorrect; //i.e. if user finishes the quiz with time remaining
+            finalScore = Math.ceil(numCorrect * (0.33 * secondsRem) * 2) - numIncorrect; //i.e. if user finishes the quiz with time remaining
         }
 
-        else finalScore = Math.ceil(numCorrect * 2) - math.Ceil(numIncorrect * 0.5); //multiply by 0.5 if there are exactly 0 seconds remaining when user finishes quiz
+        else finalScore = Math.ceil(numCorrect * 1) - math.Ceil(numIncorrect * 0.5); //multiply by 0.5 if there are exactly 0 seconds remaining when user finishes quiz
 
     }
 
