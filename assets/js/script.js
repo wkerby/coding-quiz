@@ -24,7 +24,10 @@ var questions = { //create object to store questions, possible answers, and corr
     Question3: ["Which of the following is used to establish interactivity between the end-user and the webpage?", ["Python", "JavaScript", "Perl", "HTML"], "JavaScript"],
     Question4: ["Which property of the window interface allows programmers to store data entered by the end-user?", ["localStorage", "storeObject", "body", "memory"], "localStorage"],
     Question5: ["Which method sets up a function that will be called whenever the specified event is delivered to the target?", ["addEventListener()", "listenEvent()", "bubbleTarget()", "switchFace()"], "addEventListener()"],
-    Question6: ["Is programming fun to learn?", ["No", "No", "Yes", "No"], "Yes"]
+    Question6: ["Which of the following third-party APIs is a library to facilitate CSS styling?", ["FreeStyle", "WireSheets", "Bootstrap", "MongoDB"], "Bootstrap"],
+    Question7: ["Which of the following third-party APIs is a libary for simpler, more compact JavaScript?", ["SimplifyJS", "JQuery", "JDotText", "PB&J"], "JQuery"],
+    Question8: ["Which of the following methods addresses event-bubbling?", ["stopPropagation()", "stopBubble()", "stopEvent()", "flagBubble()"], "stopPropagation()"],
+    Question9: ["Is full-stack web development fun to learn?", ["No", "No", "Yes", "No"], "Yes"]
 };
 
 
@@ -117,16 +120,21 @@ function wrongRight(event) { //create a function that notifies player if he/she 
     event.stopPropagation() // add stopPropagation function to avoid event bubbling
     var evalEl = event.target
     if (evalEl.textContent === currentAnswer) {
-        responseDisplay.setAttribute("style", "color:green; font-weight:900;");
-        responseDisplay.textContent = "Correct!";
+        responseDisplay.setAttribute("style", "color:#66E873; font-weight:900;");
+        responseDisplay.textContent = "Correct! " + String.fromCharCode(9989);
         numCorrect++;
         console.log("Current Correct: " + numCorrect);
     }
 
     else {
-        responseDisplay.setAttribute("style", "color:red; font-weight:900;");
-        responseDisplay.textContent = "Incorrect";
-        secondsRem = secondsRem - 15;
+        responseDisplay.setAttribute("style", "color:#F79393; font-weight:900;");
+        responseDisplay.textContent = "Incorrect " + String.fromCharCode(10060);
+        if (secondsRem > 15) {
+            secondsRem = secondsRem - 15;
+        }
+        else {
+            endGame(); //end the game if there are fewer than 15 seconds remaining and an incorrect answer is chosen
+        }
         numIncorrect++;
         console.log("Current Incorrect: " + numIncorrect);
 
@@ -142,10 +150,10 @@ function returnFinalScore(secondsRem, numCorrect) { //return final score as a fu
 
     else {
         if (secondsRem > 0) {
-            finalScore = (numCorrect * secondsRem * 5) - numIncorrect; //i.e. if user finishes the quiz with time remaining
+            finalScore = Math.ceil((numCorrect * 10) * (0.33 * secondsRem) * 2) - numIncorrect; //i.e. if user finishes the quiz with time remaining
         }
 
-        else finalScore = Math.ceil(numCorrect * 2.5) - math.Ceil(numIncorrect * 0.5); //multiply by 0.5 if there are exactly 0 seconds remaining when user finishes quiz
+        else finalScore = Math.ceil(numCorrect * 2) - math.Ceil(numIncorrect * 0.5); //multiply by 0.5 if there are exactly 0 seconds remaining when user finishes quiz
 
     }
 
@@ -155,6 +163,7 @@ function returnFinalScore(secondsRem, numCorrect) { //return final score as a fu
 function endGame() {
     finalScore = returnFinalScore(secondsRem, numCorrect);
     timeRem.textContent = "GAME OVER! Final score: " + finalScore; //display total numer of points here at end of game
+    timeRem.setAttribute("style", "font-weight:900;");
     gameOn = false;
 }
 
