@@ -86,6 +86,7 @@ function displayTime() { //create function that dynamically displays time in the
         if (secondsRem <= 0) {
             clearInterval(timerInterval);
             endGame();
+
         }
 
         else if (gameOn == false) {
@@ -153,7 +154,7 @@ function returnFinalScore(secondsRem, numCorrect) { //return final score as a fu
             finalScore = Math.ceil(numCorrect * (0.33 * secondsRem) * 2) - numIncorrect; //i.e. if user finishes the quiz with time remaining
         }
 
-        else finalScore = Math.ceil(numCorrect * 1) - math.Ceil(numIncorrect * 0.5); //multiply by 0.5 if there are exactly 0 seconds remaining when user finishes quiz
+        else finalScore = Math.ceil(numCorrect * 1) - Math.ceil(numIncorrect * 0.33); //multiply by 0.5 if there are exactly 0 seconds remaining when user finishes quiz
 
     }
 
