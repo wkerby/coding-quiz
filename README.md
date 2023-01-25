@@ -21,7 +21,7 @@ https://wkerby.github.io/coding-quiz/
 
 And below you will find a screenshot of the deployed webpage in action:
 
-![coding-quiz-final](https://user-images.githubusercontent.com/101428715/214562244-65d68ac6-a998-490a-a8dc-dbbf0d63ece7.png)
+![coding-quiz-final](https://user-images.githubusercontent.com/101428715/214563700-3cbdb5fd-10a6-4aae-8f0b-d2b954cfd51a.png)
 
 ## Credits
 
