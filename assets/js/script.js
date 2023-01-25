@@ -162,7 +162,7 @@ function returnFinalScore(secondsRem, numCorrect) { //return final score as a fu
 
 function endGame() {
     finalScore = returnFinalScore(secondsRem, numCorrect);
-    timeRem.textContent = "GAME OVER! Final score: " + finalScore; //display total numer of points here at end of game
+    timeRem.textContent = "QUIZ OVER! Final score: " + finalScore; //display total numer of points here at end of game
     timeRem.setAttribute("style", "font-weight:900;");
     gameOn = false;
 }
