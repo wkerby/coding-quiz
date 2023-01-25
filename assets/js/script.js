@@ -24,6 +24,17 @@ var questions = {
     Question5: ["Is programming fun to learn?", ["No", "No", "Yes", "No"], "Yes"]
 };
 
+//establish question, answer choices, and correct answer at start of game
+currentQuestion = Object.values(questions)[index][0]; //set current question
+currentChoices = Object.values(questions)[index][1]; //set current answer choices
+currentAnswer = Object.values(questions)[index][2]; //set current correct answer
+
+question.textContent = currentQuestion; //write current question into webpage
+choiceA.textContent = currentChoices[0]; //write answer choice A
+choiceB.textContent = currentChoices[1]; //write answer choice B
+choiceC.textContent = currentChoices[2]; //write answer choice C
+choiceD.textContent = currentChoices[3]; //write answer choice D
+
 //create functions
 function startGame() {
     console.log("Game started")
@@ -82,28 +93,25 @@ function displayTime() { //create function that dynamically displays time in the
 }
 
 function nextQuestion() { //create function to determine which question to assign to current question
+    index++;
     if (gameOn) {
-        console.log("Next question");
-        index++;
+
         if (index > (Object.values(questions).length) - 1) {
             index = 0;
             endGame(); //make sure to end game when the player has cycled throug all of the questions
         }
 
         else {
-            index++;
+            currentQuestion = Object.values(questions)[index][0]; //set current question
+            currentChoices = Object.values(questions)[index][1]; //set current answer choices
+            currentAnswer = Object.values(questions)[index][2]; //set current correct answer
+
+            question.textContent = currentQuestion; //write current question into webpage
+            choiceA.textContent = currentChoices[0]; //write answer choice A
+            choiceB.textContent = currentChoices[1]; //write answer choice B
+            choiceC.textContent = currentChoices[2]; //write answer choice C
+            choiceD.textContent = currentChoices[3]; //write answer choice D
         }
-
-        currentQuestion = object.Values(questions)[index][0]; //set current question
-        currentChoices = object.Values(questions)[index][1]; //set current answer choices
-        currentAnswer = object.Values(questions)[index][2]; //set current correct answer
-
-        question.textContent = currentQuestion; //write current question into webpage
-        choiceA.textContent = currentChoices[0]; //write answer choice A
-        choiceB.textContent = currentChoices[1]; //write answer choice B
-        choiceC.textContent = currentChoices[2]; //write answer choice C
-        choiceD.textContent = currentChoices[3]; //write answer choice D
-
     }
 }
 
